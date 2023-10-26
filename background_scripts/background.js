@@ -1,7 +1,7 @@
 let tweetSentiment = {};
 
 // NOTE FOR CHROME: please swap "browser" for "chrome"
-browser.runtime.onMessage.addListener(function (message) {
+chrome.runtime.onMessage.addListener(function (message) {
     // Listen for the "sentiment" message, if seen update the `tweetSentiment` object to the data received
     if (message.type === "sentiment") tweetSentiment = message.data;
 });
@@ -22,3 +22,16 @@ function countSentiments(obj) {
 
     return Object.values(counts);
 }
+
+// NOTE: instead of "browser" please use "chrome" if you are planning to run the extension on the chrome browser
+chrome.runtime.onMessage.addListener(function (message) {
+    if (message.type === "sentiment") 
+        tweetSentiment = message.data; // Set the object to the data received
+  
+    // Get the counts of each sentiment value and send it to the other scripts
+    sentimentValues = countSentiments(tweetSentiment);
+    chrome.runtime.sendMessage({
+      type: "sentimentValues",
+      data: sentimentValues,
+    });
+  });
