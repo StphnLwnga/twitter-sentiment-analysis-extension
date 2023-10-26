@@ -1,3 +1,7 @@
+
+// Make a global object that stores the current Tweet Sentiments that have been made
+let tweetSentiment = {};
+
 // This function performs sentiment analysis on a given string of text
 function analyzeSentiment(text) {
     // For now, just randomly return a sentiment value (1, -1, or 0)
@@ -57,3 +61,8 @@ function doSentimentAnalysis() {
     tweets = document.querySelectorAll('[data-testid="tweetText"]');
     categorizeAllTweets(tweets);
 }
+
+// Make the Analysis happen everytime the page is scrolled
+document.addEventListener("scroll", function () {
+    doSentimentAnalysis();
+});
