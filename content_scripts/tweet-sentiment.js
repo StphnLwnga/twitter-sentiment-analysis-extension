@@ -13,7 +13,7 @@ function analyzeSentiment(text) {
 
     // NOTE: instead of "browser" please use "chrome" if you are planning to run the extension on the chrome browser
     // Send the other scripts the object with all the calculated sentiments
-    browser.runtime.sendMessage({
+    chrome.runtime.sendMessage({
         type: "sentiment",
         data: tweetSentiment,
     });
