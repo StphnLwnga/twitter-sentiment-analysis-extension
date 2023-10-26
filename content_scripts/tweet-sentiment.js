@@ -43,3 +43,11 @@ function categorizeTweet(tweet) {
     const sentiment = analyzeSentiment(text);
     tweet.setAttribute("sentiment", sentiment);
 }
+
+// This function categorizes all tweets on the page by performing sentiment analysis on each one
+function categorizeAllTweets(tweets) {
+    // Loop through each object in tweets and find it's sentiment
+    tweets.forEach((tweet) => {
+        categorizeTweet(tweet);
+    });
+}
