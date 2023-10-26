@@ -51,3 +51,9 @@ function categorizeAllTweets(tweets) {
         categorizeTweet(tweet);
     });
 }
+
+// This function gets all tweets and then categorizes them all
+function doSentimentAnalysis() {
+    tweets = document.querySelectorAll('[data-testid="tweetText"]');
+    categorizeAllTweets(tweets);
+}
