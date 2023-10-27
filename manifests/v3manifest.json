@@ -39,11 +39,5 @@
         "scripts/chart@2.9.3.min.js"
       ]
     }
-  ],
-  "permissions": [
-    "scripting"
-  ],
-  "host_permissions": [
-    "<all_urls>"
   ]
 }

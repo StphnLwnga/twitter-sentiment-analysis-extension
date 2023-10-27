@@ -1,3 +1,14 @@
+chrome.runtime.onInstalled.addListener(async () => {
+    for (const cs of chrome.runtime.getManifest().content_scripts) {
+        for (const tab of await chrome.tabs.query({ url: cs.matches })) {
+            chrome.scripting.executeScript({
+                target: { tabId: tab.id },
+                files: cs.js,
+            });
+        }
+    }
+});
+
 let tweetSentiment = {};
 
 // NOTE FOR CHROME: please swap "browser" for "chrome"
@@ -25,6 +36,7 @@ function countSentiments(obj) {
 
 // NOTE: instead of "browser" please use "chrome" if you are planning to run the extension on the chrome browser
 chrome.runtime.onMessage.addListener(function (message) {
+    console.log('Listener Active')
     if (message.type === "sentiment")
         tweetSentiment = message.data; // Set the object to the data received
 
@@ -36,7 +48,7 @@ chrome.runtime.onMessage.addListener(function (message) {
     sentimentValues = [
         sentimentObj["-1"], sentimentObj["0"], sentimentObj["1"],
     ];
-    
+
     // Sentiment values available to other scripts
     chrome.runtime.sendMessage({
         type: "sentimentValues",

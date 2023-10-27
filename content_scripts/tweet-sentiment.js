@@ -3,6 +3,7 @@ let tweetSentiment = {};
 
 // This function performs sentiment analysis on a given string of text
 function analyzeSentiment(text) {
+    console.log(`Analyzing text - ${text}`);
     // For now, just randomly return a sentiment value (1, -1, or 0)
     const sentiments = [1, -1, 0];
     const sentiment = sentiments[Math.floor(Math.random() * sentiments.length)];
@@ -24,6 +25,7 @@ function analyzeSentiment(text) {
 // This function performs sentiment analysis on the text of a Twitter post
 // NOTE: This function does not handle the case with only an image, gif or video
 function categorizeTweet(tweet) {
+    console.log(`categorizing tweet`)
     // check if the tweet's DOM element already has been seen, if it has move on
     if (tweet.hasAttribute("sentiment")) return;
     // Grab all the span elements from the tweet (these contain all the text inside the tweet)
@@ -50,6 +52,7 @@ function categorizeTweet(tweet) {
 // This function categorizes all tweets on the page by performing sentiment analysis on each one
 function categorizeAllTweets(tweets) {
     // Loop through each object in tweets and find it's sentiment
+    console.log(`Categorizing all tweets`)
     tweets.forEach((tweet) => {
         categorizeTweet(tweet);
     });
@@ -57,17 +60,20 @@ function categorizeAllTweets(tweets) {
 
 // This function gets all tweets and then categorizes them all
 function doSentimentAnalysis() {
+    console.log('Doing analysis');
     tweets = document.querySelectorAll('[data-testid="tweetText"]');
     categorizeAllTweets(tweets);
 }
 
 // Make the Analysis happen everytime the page is scrolled
 document.addEventListener("scroll", function () {
+    console.log('Analysing on scroll')
     doSentimentAnalysis();
 });
 
 // Reset sentiment listener
 chrome.runtime.onMessage.addListener(function (message) {
+    console.log('Resetting sentiment')
     if (message.type === "resetSentiment")
         tweetSentiment = {}
 });

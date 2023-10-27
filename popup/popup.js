@@ -1,5 +1,17 @@
+const srcs = [
+    "scripts/chart@2.9.3.min.js",
+];
+
+srcs.forEach(src => {
+    const script = document.createElement("script");
+    script.src = chrome.runtime.getURL(src);
+    script.type = "`module`";
+    document.body.appendChild(script)
+})
+
 // This function create the pie chart using the data provided
 function createPieChart(data) {
+    console.log('creating chart')
     document.getElementById("myChart").remove();
     const canvas = document.createElement("canvas");
     canvas.id = "myChart";
@@ -38,7 +50,7 @@ function createPieChart(data) {
     return;
 }
 
-sentimentValues = [];
+const sentimentValues = [];
 
 // NOTE: instead of "browser" please use "chrome" if you are planning to run the extension on the chrome browser
 // Send a "getSentiment" request to load the sentiments already loaded
