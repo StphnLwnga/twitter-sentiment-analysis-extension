@@ -1,4 +1,3 @@
-
 // Make a global object that stores the current Tweet Sentiments that have been made
 let tweetSentiment = {};
 
