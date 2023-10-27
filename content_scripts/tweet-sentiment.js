@@ -13,7 +13,7 @@ function analyzeSentiment(text) {
 
     // NOTE: instead of "browser" please use "chrome" if you are planning to run the extension on the chrome browser
     // Send the other scripts the object with all the calculated sentiments
-    chrome.runtime.sendMessage({
+    browser.runtime.sendMessage({
         type: "sentiment",
         data: tweetSentiment,
     });
@@ -72,7 +72,7 @@ document.addEventListener("scroll", function () {
 });
 
 // Reset sentiment listener
-chrome.runtime.onMessage.addListener(function (message) {
+browser.runtime.onMessage.addListener(function (message) {
     console.log('Resetting sentiment')
     if (message.type === "resetSentiment")
         tweetSentiment = {}

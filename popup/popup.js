@@ -1,13 +1,13 @@
-const srcs = [
-    "scripts/chart@2.9.3.min.js",
-];
+// const srcs = [
+//     "scripts/chart@2.9.3.min.js",
+// ];
 
-srcs.forEach(src => {
-    const script = document.createElement("script");
-    script.src = chrome.runtime.getURL(src);
-    script.type = "`module`";
-    document.body.appendChild(script)
-})
+// srcs.forEach(src => {
+//     const script = document.createElement("script");
+//     script.src = browser.runtime.getURL(src);
+//     script.type = "`module`";
+//     document.body.appendChild(script)
+// })
 
 // This function create the pie chart using the data provided
 function createPieChart(data) {
@@ -50,12 +50,12 @@ function createPieChart(data) {
     return;
 }
 
-const sentimentValues = [];
+let sentimentValues = [];
 
 // NOTE: instead of "browser" please use "chrome" if you are planning to run the extension on the chrome browser
 // Send a "getSentiment" request to load the sentiments already loaded
-chrome.runtime.sendMessage({ type: "getSentiment" });
-chrome.runtime.onMessage.addListener(function (message) {
+browser.runtime.sendMessage({ type: "getSentiment" });
+browser.runtime.onMessage.addListener(function (message) {
     // Whenever new sentiments are found, this will trigger updating the sentimentValues data
     if (message.type === "sentimentValues") sentimentValues = message.data; // Set the object to the data received
     // Recreate the pie chart whenever there is any update
@@ -67,10 +67,10 @@ reset.style = "display:block; margin: 0 auto; margin-bottom: 0.5rem;";
 reset.textContent = "Reset";
 reset.addEventListener("click", () => {
       // NOTE: instead of "browser" please use "chrome" if you are planning to run the extension on the chrome browser
-    chrome.runtime.sendMessage({type: "reset"});
-    chrome.tabs.query({active: true, currentWindow: true}).then(tabs => {
+    browser.runtime.sendMessage({type: "resetSentiment"});
+    browser.tabs.query({active: true, currentWindow: true}).then(tabs => {
         // Send a message to the content script in the active tab
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browser.tabs.sendMessage(tabs[0].id, {
             type: "resetSentiment",
         });
     });
