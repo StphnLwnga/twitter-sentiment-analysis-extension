@@ -28,10 +28,19 @@ chrome.runtime.onMessage.addListener(function (message) {
     if (message.type === "sentiment")
         tweetSentiment = message.data; // Set the object to the data received
 
-    // Get the counts of each sentiment value and send it to the other scripts
-    sentimentValues = countSentiments(tweetSentiment);
+    else if (messagge.type === "resetSentiment")
+        tweetSentiment = {} // Reset sentiments
+
+    // Count sentiment values & save to values array
+    sentimentObj = countSentiments(tweetSentiment);
+    sentimentValues = [
+        sentimentObj["-1"], sentimentObj["0"], sentimentObj["1"],
+    ];
+    
+    // Sentiment values available to other scripts
     chrome.runtime.sendMessage({
         type: "sentimentValues",
         data: sentimentValues,
     });
 });
+

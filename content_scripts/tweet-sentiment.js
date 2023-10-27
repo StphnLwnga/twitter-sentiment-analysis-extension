@@ -65,3 +65,9 @@ function doSentimentAnalysis() {
 document.addEventListener("scroll", function () {
     doSentimentAnalysis();
 });
+
+// Reset sentiment listener
+chrome.runtime.onMessage.addListener(function (message) {
+    if (message.type === "resetSentiment")
+        tweetSentiment = {}
+});
