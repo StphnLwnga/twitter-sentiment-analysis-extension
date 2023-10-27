@@ -1,6 +1,6 @@
 {
   "description": "Do Brand Sentiment Analysis in Twitter",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Brand Sentiment Analysis in Twitter",
   "version": "1.0",
   "content_security_policy": "script-src 'self' https://cdnjs.cloudflare.com; object-src 'self'",
