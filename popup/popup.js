@@ -67,7 +67,7 @@ reset.style = "display:block; margin: 0 auto; margin-bottom: 0.5rem;";
 reset.textContent = "Reset";
 reset.addEventListener("click", () => {
       // NOTE: instead of "browser" please use "chrome" if you are planning to run the extension on the chrome browser
-    chrome.runtime.sendMessage({type: "reset"});
+    chrome.runtime.sendMessage({type: "resetSentiment"});
     chrome.tabs.query({active: true, currentWindow: true}).then(tabs => {
         // Send a message to the content script in the active tab
         chrome.tabs.sendMessage(tabs[0].id, {

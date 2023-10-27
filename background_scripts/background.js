@@ -40,7 +40,7 @@ chrome.runtime.onMessage.addListener(function (message) {
     if (message.type === "sentiment")
         tweetSentiment = message.data; // Set the object to the data received
 
-    else if (messagge.type === "resetSentiment")
+    else if (message.type === "resetSentiment")
         tweetSentiment = {} // Reset sentiments
 
     // Count sentiment values & save to values array
